@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://78oqdqr27k1i"]
+
+[ext_resource type="Script" uid="uid://7bagsimi81y1" path="res://gamefiles/scripts/Generators/chunk_generator.gd" id="1_we57m"]
+
+[node name="ChunkGenerator" type="Node3D"]
+script = ExtResource("1_we57m")

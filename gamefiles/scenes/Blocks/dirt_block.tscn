@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://bso8mt2xaec7u"]
+
+[ext_resource type="Material" uid="uid://r1r8x5kdt0pg" path="res://gamefiles/res/materials/blocks/dirt_block.tres" id="2_4fl6l"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_wq65q"]
+
+[node name="DirtBlock" type="Node3D"]
+
+[node name="s1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+material_override = ExtResource("2_4fl6l")
+mesh = SubResource("QuadMesh_wq65q")
+
+[node name="s2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
+material_override = ExtResource("2_4fl6l")
+mesh = SubResource("QuadMesh_wq65q")
+
+[node name="s3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.5, 0, 0)
+material_override = ExtResource("2_4fl6l")
+mesh = SubResource("QuadMesh_wq65q")
+
+[node name="s4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -0.5, 0, 0)
+material_override = ExtResource("2_4fl6l")
+mesh = SubResource("QuadMesh_wq65q")
+
+[node name="b" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 0, -0.5, 0)
+material_override = ExtResource("2_4fl6l")
+mesh = SubResource("QuadMesh_wq65q")
+
+[node name="t" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, 0, 0.5, 0)
+material_override = ExtResource("2_4fl6l")
+mesh = SubResource("QuadMesh_wq65q")

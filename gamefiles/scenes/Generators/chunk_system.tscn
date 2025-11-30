@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbw433k65odns"]
+
+[ext_resource type="Script" uid="uid://b8cqmwtkgmh4n" path="res://gamefiles/scripts/Generators/chunk_system.gd" id="1_stfav"]
+
+[node name="ChunkSystem" type="Node3D" node_paths=PackedStringArray("chunk_generator")]
+script = ExtResource("1_stfav")
+chunk_generator = NodePath("")
+
+[node name="ChunkStart" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -16)
+gizmo_extents = 1.0
+
+[node name="ChunkFinish" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 16)
+gizmo_extents = 1.0
