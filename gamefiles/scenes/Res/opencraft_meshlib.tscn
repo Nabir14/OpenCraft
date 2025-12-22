@@ -1,0 +1,25 @@
+[gd_scene load_steps=7 format=3 uid="uid://i5gesa3obv6y"]
+
+[ext_resource type="Material" uid="uid://cyd8eccl1r1gb" path="res://gamefiles/res/materials/blocks/null_block.tres" id="1_7c3w7"]
+[ext_resource type="Material" uid="uid://chhwax4i1qm6u" path="res://gamefiles/res/materials/blocks/grass_block.tres" id="2_vrfqy"]
+[ext_resource type="Material" uid="uid://r1r8x5kdt0pg" path="res://gamefiles/res/materials/blocks/dirt_block.tres" id="3_hxaud"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vrfqy"]
+material = ExtResource("1_7c3w7")
+
+[sub_resource type="BoxMesh" id="BoxMesh_hxaud"]
+material = ExtResource("2_vrfqy")
+
+[sub_resource type="BoxMesh" id="BoxMesh_rnvy5"]
+material = ExtResource("3_hxaud")
+
+[node name="OpencraftMeshlib" type="Node3D"]
+
+[node name="null_block" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_vrfqy")
+
+[node name="grass_block" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_hxaud")
+
+[node name="dirt_block" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_rnvy5")

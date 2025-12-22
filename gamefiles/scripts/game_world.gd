@@ -8,3 +8,9 @@ func _ready() -> void:
 	
 	%game_version.text = "Game Version: "+OpenCraftGame.get_version()
 	%api_version.text = "API Version: "+OpenCraftAPI.get_version()
+	
+	$ChunkSystem.generate_grid_chunk($GridMap, 8, 8)
+
+func _process(_delta: float) -> void:
+	%fps.text = "FPS: "+str(Engine.get_frames_per_second())
+	%draw_calls.text = "Draw Calls: "+str(Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME))

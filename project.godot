@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-OpenCraftBlockSystem="*res://gamefiles/scripts/Globals/OpenCraftBlockSystem.gd"
 OpenCraftGame="*res://gamefiles/scripts/Globals/OpenCraftGame.gd"
 OpenCraftAPI="*res://gamefiles/scripts/Globals/OpenCraftAPI.gd"
 

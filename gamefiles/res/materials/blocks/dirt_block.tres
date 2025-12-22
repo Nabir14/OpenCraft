@@ -1,10 +1,8 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://r1r8x5kdt0pg"]
-
-[ext_resource type="Texture2D" uid="uid://dw285rgyyc67b" path="res://gamefiles/textures/debug/dirt.png" id="1_4wdxi"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://r1r8x5kdt0pg"]
 
 [resource]
 shading_mode = 2
-albedo_texture = ExtResource("1_4wdxi")
+albedo_color = Color(1, 0.28627452, 0.12156863, 1)
 metallic_specular = 0.0
 roughness = 0.0
 texture_filter = 0

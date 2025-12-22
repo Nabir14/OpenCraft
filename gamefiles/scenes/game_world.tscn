@@ -1,13 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfnw2nb3hwh0v"]
+[gd_scene load_steps=8 format=3 uid="uid://cfnw2nb3hwh0v"]
 
 [ext_resource type="Environment" uid="uid://brkiwlk264ma5" path="res://gamefiles/res/GameEnv.tres" id="1_napix"]
 [ext_resource type="Script" uid="uid://ctcjknmqwtuqw" path="res://gamefiles/scripts/game_world.gd" id="1_xrj6a"]
 [ext_resource type="PackedScene" uid="uid://ctse4yo52xrip" path="res://gamefiles/scenes/Players/debug_camera.tscn" id="2_o1bop"]
-[ext_resource type="PackedScene" uid="uid://78oqdqr27k1i" path="res://gamefiles/scenes/Generators/chunk_generator.tscn" id="4_xrj6a"]
+[ext_resource type="MeshLibrary" uid="uid://d1d6tiq7d7lbb" path="res://gamefiles/res/opencraft_meshlib.tres" id="4_47d75"]
+[ext_resource type="Script" uid="uid://cpcc4lw8as8yn" path="res://gamefiles/scripts/Generators/grid_generator.gd" id="4_xrj6a"]
 [ext_resource type="PackedScene" uid="uid://bbw433k65odns" path="res://gamefiles/scenes/Generators/chunk_system.tscn" id="5_47d75"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_47d75"]
-noise_type = 3
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ymiq4"]
+noise_type = 5
+frequency = 0.005
 
 [node name="GameWorld" type="Node3D"]
 script = ExtResource("1_xrj6a")
@@ -22,12 +24,6 @@ transform = Transform3D(0.70710677, -0.49999997, 0.49999997, 0, 0.70710677, 0.70
 
 [node name="DebugCamera" parent="." instance=ExtResource("2_o1bop")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-
-[node name="ChunkGenerator" parent="." instance=ExtResource("4_xrj6a")]
-noise = SubResource("FastNoiseLite_47d75")
-
-[node name="ChunkSystem" parent="." node_paths=PackedStringArray("chunk_generator") instance=ExtResource("5_47d75")]
-chunk_generator = NodePath("../ChunkGenerator")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -48,22 +44,49 @@ text = "OpenCraft"
 [node name="game_version" type="Label" parent="CanvasLayer/debug_labels"]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 23.0
-grow_horizontal = 0
+offset_top = 24.0
+offset_right = 169.0
+offset_bottom = 47.0
 text = "Game Version: -1.-1.-1"
 
 [node name="api_version" type="Label" parent="CanvasLayer/debug_labels"]
 unique_name_in_owner = true
 layout_mode = 1
+offset_top = 48.0
+offset_right = 149.0
+offset_bottom = 71.0
+text = "API Version: -1.-1.-1"
+
+[node name="fps" type="Label" parent="CanvasLayer/debug_labels"]
+unique_name_in_owner = true
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -52.0
+offset_left = -169.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "FPS: -1"
+horizontal_alignment = 2
+
+[node name="draw_calls" type="Label" parent="CanvasLayer/debug_labels"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -168.0
 offset_top = 24.0
+offset_right = 1.0
 offset_bottom = 47.0
 grow_horizontal = 0
-text = "API Version: -1.-1.-1"
+text = "Draw Calls: -1"
+horizontal_alignment = 2
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("4_47d75")
+cell_size = Vector3(1, 1, 1)
+script = ExtResource("4_xrj6a")
+chunk_noise = SubResource("FastNoiseLite_ymiq4")
+
+[node name="ChunkSystem" parent="." instance=ExtResource("5_47d75")]
