@@ -1,92 +1,81 @@
-[gd_scene load_steps=8 format=3 uid="uid://cfnw2nb3hwh0v"]
+[gd_scene format=3 uid="uid://cfnw2nb3hwh0v"]
 
 [ext_resource type="Environment" uid="uid://brkiwlk264ma5" path="res://gamefiles/res/GameEnv.tres" id="1_napix"]
 [ext_resource type="Script" uid="uid://ctcjknmqwtuqw" path="res://gamefiles/scripts/game_world.gd" id="1_xrj6a"]
-[ext_resource type="PackedScene" uid="uid://ctse4yo52xrip" path="res://gamefiles/scenes/Players/debug_camera.tscn" id="2_o1bop"]
-[ext_resource type="MeshLibrary" uid="uid://d1d6tiq7d7lbb" path="res://gamefiles/res/opencraft_meshlib.tres" id="4_47d75"]
-[ext_resource type="Script" uid="uid://cpcc4lw8as8yn" path="res://gamefiles/scripts/Generators/grid_generator.gd" id="4_xrj6a"]
-[ext_resource type="PackedScene" uid="uid://bbw433k65odns" path="res://gamefiles/scenes/Generators/chunk_system.tscn" id="5_47d75"]
+[ext_resource type="PackedScene" uid="uid://w3ttx3uftw56" path="res://gamefiles/scenes/Ui/game_ui.tscn" id="2_d1s4n"]
+[ext_resource type="Script" uid="uid://x4ht2x0j3upw" path="res://gamefiles/scripts/Generators/voxel_generator.gd" id="5_47d75"]
+[ext_resource type="PackedScene" uid="uid://cyc3vbt0wibjn" path="res://gamefiles/scenes/Players/player_3d.tscn" id="6_ju2yj"]
+[ext_resource type="Script" uid="uid://bqvw2x3fy2vk5" path="res://gamefiles/scripts/Utils/VoxelShape/cube_voxel.gd" id="6_ymiq4"]
+[ext_resource type="Script" uid="uid://dj7vdiodjmlt4" path="res://gamefiles/scripts/Generators/chunk_generator.gd" id="7_d1s4n"]
+[ext_resource type="Material" uid="uid://bd4b4aftts2f1" path="res://gamefiles/res/materials/water.tres" id="7_ju2yj"]
+[ext_resource type="Material" uid="uid://chhwax4i1qm6u" path="res://gamefiles/res/materials/blocks/grass_block.tres" id="8_3y5bu"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ymiq4"]
-noise_type = 5
-frequency = 0.005
+[sub_resource type="PlaneMesh" id="PlaneMesh_d1s4n"]
+material = ExtResource("7_ju2yj")
+size = Vector2(1024, 1024)
 
-[node name="GameWorld" type="Node3D"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_ymiq4"]
+size = Vector2(1024, 1024)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ju2yj"]
+data = PackedVector3Array(512, 0, 512, -512, 0, 512, 512, 0, -512, -512, 0, 512, -512, 0, -512, 512, 0, -512)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ju2yj"]
+
+[sub_resource type="Resource" id="Resource_ju2yj"]
+script = ExtResource("6_ymiq4")
+metadata/_custom_type_script = "uid://bqvw2x3fy2vk5"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ju2yj"]
+
+[node name="GameWorld" type="Node3D" unique_id=2008152113]
 script = ExtResource("1_xrj6a")
 
-[node name="WorldEnv" type="Node3D" parent="."]
+[node name="GameUI" parent="." unique_id=333053460 instance=ExtResource("2_d1s4n")]
+unique_name_in_owner = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="WorldEnv"]
+[node name="WorldEnv" type="Node3D" parent="." unique_id=1775888319]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="WorldEnv" unique_id=1076880175]
 environment = ExtResource("1_napix")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnv"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnv" unique_id=797663753]
 transform = Transform3D(0.70710677, -0.49999997, 0.49999997, 0, 0.70710677, 0.70710677, -0.70710677, -0.49999997, 0.49999997, 0, 0, 0)
 
-[node name="DebugCamera" parent="." instance=ExtResource("2_o1bop")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+[node name="static_objects" type="Node3D" parent="." unique_id=1655714739]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="water" type="MeshInstance3D" parent="static_objects" unique_id=2017625596]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.001, -0.25, 0.001)
+mesh = SubResource("PlaneMesh_d1s4n")
+skeleton = NodePath("../..")
 
-[node name="debug_labels" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="void_barrier" type="MeshInstance3D" parent="static_objects" unique_id=751150509]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.001, -16, 0.001)
+mesh = SubResource("PlaneMesh_ymiq4")
+skeleton = NodePath("../..")
 
-[node name="title" type="Label" parent="CanvasLayer/debug_labels"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "OpenCraft"
+[node name="StaticBody3D" type="StaticBody3D" parent="static_objects/void_barrier" unique_id=499588941]
 
-[node name="game_version" type="Label" parent="CanvasLayer/debug_labels"]
-unique_name_in_owner = true
-layout_mode = 1
-offset_top = 24.0
-offset_right = 169.0
-offset_bottom = 47.0
-text = "Game Version: -1.-1.-1"
+[node name="CollisionShape3D" type="CollisionShape3D" parent="static_objects/void_barrier/StaticBody3D" unique_id=545609939]
+shape = SubResource("ConcavePolygonShape3D_ju2yj")
 
-[node name="api_version" type="Label" parent="CanvasLayer/debug_labels"]
-unique_name_in_owner = true
-layout_mode = 1
-offset_top = 48.0
-offset_right = 149.0
-offset_bottom = 71.0
-text = "API Version: -1.-1.-1"
+[node name="dynamic_objects" type="Node3D" parent="." unique_id=95253621]
 
-[node name="fps" type="Label" parent="CanvasLayer/debug_labels"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -169.0
-offset_bottom = 23.0
-grow_horizontal = 0
-text = "FPS: -1"
-horizontal_alignment = 2
+[node name="Player3D" parent="dynamic_objects" unique_id=1662346962 instance=ExtResource("6_ju2yj")]
+transform = Transform3D(0.01743498, 0, 0.999848, 0, 1, 0, -0.999848, 0, 0.01743498, 0, 16, 0)
 
-[node name="draw_calls" type="Label" parent="CanvasLayer/debug_labels"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -168.0
-offset_top = 24.0
-offset_right = 1.0
-offset_bottom = 47.0
-grow_horizontal = 0
-text = "Draw Calls: -1"
-horizontal_alignment = 2
+[node name="VoxelGenerator" type="MeshInstance3D" parent="dynamic_objects" unique_id=784344765]
+mesh = SubResource("ArrayMesh_ju2yj")
+skeleton = NodePath("../..")
+script = ExtResource("5_47d75")
+shape = SubResource("Resource_ju2yj")
+material = ExtResource("8_3y5bu")
+metadata/_custom_type_script = "uid://x4ht2x0j3upw"
 
-[node name="GridMap" type="GridMap" parent="."]
-mesh_library = ExtResource("4_47d75")
-cell_size = Vector3(1, 1, 1)
-script = ExtResource("4_xrj6a")
-chunk_noise = SubResource("FastNoiseLite_ymiq4")
-
-[node name="ChunkSystem" parent="." instance=ExtResource("5_47d75")]
+[node name="ChunkGenerator" type="Node3D" parent="dynamic_objects" unique_id=300614869 node_paths=PackedStringArray("voxel_generator")]
+script = ExtResource("7_d1s4n")
+voxel_generator = NodePath("../VoxelGenerator")
+noise = SubResource("FastNoiseLite_ju2yj")
+size = Vector3(32, 4, 32)
+ratio = 0.1
+metadata/_custom_type_script = "uid://dj7vdiodjmlt4"
