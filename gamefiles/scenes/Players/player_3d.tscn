@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cyc3vbt0wibjn"]
+
+[ext_resource type="Script" uid="uid://yid522evu1kv" path="res://gamefiles/scripts/Players/player3d.gd" id="1_fykjc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x6lco"]
+
+[node name="Player3D" type="CharacterBody3D" unique_id=1662346962 node_paths=PackedStringArray("head")]
+script = ExtResource("1_fykjc")
+head = NodePath("head")
+forwardAction = "MoveForward"
+backwardAction = "MoveBackward"
+leftAction = "MoveLeft"
+rightAction = "MoveRight"
+jumpAction = "Jump"
+metadata/_custom_type_script = "uid://yid522evu1kv"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2080972810]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_x6lco")
+
+[node name="head" type="Node3D" parent="." unique_id=89467103]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="Camera3D" type="Camera3D" parent="head" unique_id=1761211550]
