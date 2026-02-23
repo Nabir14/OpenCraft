@@ -4,35 +4,12 @@ class_name VoxelGenerator
 @export var shape : VoxelShape
 @export var material : Material
 
-func generate_data_2d(noise : Noise, max_size : Vector3, min_threshold : float) ->  Dictionary[Vector3, String]:
-	var data : Dictionary[Vector3, String]
-	
-	for x in range(-max_size.x, max_size.x):
-		for y in range(-max_size.x, max_size.y):
-			var value : float = noise.get_noise_2d(x, y)
-			if value > min_threshold:
-				data[Vector3(x, 0 ,y)] = "Dummy"
-	
-	return data
-
-func generate_data_3d(noise : Noise, max_size : Vector3, min_threshold : float) -> Dictionary[Vector3, String]:
-	var data : Dictionary[Vector3, String]
-	
-	for x in range(-max_size.x, max_size.x):
-		for y in range(-max_size.x, max_size.y):
-			for z in range(-max_size.x, max_size.z):
-				var value : float = noise.get_noise_3d(x, y, z)
-				if value > min_threshold:
-					data[Vector3(x, y ,z)] = "Dummy"
-	
-	return data
-
 func generate_mesh(data : Dictionary[Vector3, String]) -> void:
 	var vertices : PackedVector3Array
 	var normals : PackedVector3Array
 	
 	for pos in data:
-		var voxel_data : Dictionary[String, Array] = add_voxel(data, pos)
+		var voxel_data : Dictionary[String, Array] = create_voxel_data(data, pos)
 		for vertex in voxel_data.vertices:
 			vertices.append(vertex)
 		for normal in voxel_data.normals:
@@ -40,7 +17,7 @@ func generate_mesh(data : Dictionary[Vector3, String]) -> void:
 	
 	generate_draw_call(vertices, normals)
 
-func add_voxel(data : Dictionary[Vector3, String], pos: Vector3) -> Dictionary[String, Array]:
+func create_voxel_data(data : Dictionary[Vector3, String], pos: Vector3) -> Dictionary[String, Array]:
 	var vertices : Array[Vector3]
 	var normals : Array[Vector3]
 	

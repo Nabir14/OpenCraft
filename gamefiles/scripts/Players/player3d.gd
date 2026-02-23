@@ -12,8 +12,8 @@ class_name  Player3D
 @export var backwardAction : String = "ui_down"
 @export var leftAction : String = "ui_left"
 @export var rightAction : String = "ui_right"
-@export var jumpAction : String = ""
-
+@export var jumpAction : String = "ui_select"
+@export var toggleFocusAction : String = "ui_cancel"
 var _has_error : bool = false
 
 func _ready() -> void:
@@ -30,7 +30,7 @@ func _input(event: InputEvent) -> void:
 	if _has_error:
 		return
 	
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed(toggleFocusAction):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
