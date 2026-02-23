@@ -4,6 +4,8 @@ class_name GameWorld
 var draw_debug_wireframe : bool = false
 var show_debug_info : bool = false
 
+@export var chunk_generator : ChunkGenerator
+
 func _init() -> void:
 	RenderingServer.set_debug_generate_wireframes(true)
 
@@ -15,6 +17,7 @@ func _ready() -> void:
 	%GameUI.update_ui_element("game_version", OpenCraftGame.get_version())
 	%GameUI.update_ui_element("api_version", OpenCraftAPI.get_version())
 	
+	chunk_generator.generate()
 	
 
 func _input(event: InputEvent) -> void:

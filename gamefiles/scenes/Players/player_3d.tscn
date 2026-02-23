@@ -12,6 +12,7 @@ backwardAction = "MoveBackward"
 leftAction = "MoveLeft"
 rightAction = "MoveRight"
 jumpAction = "Jump"
+toggleFocusAction = "Escape"
 metadata/_custom_type_script = "uid://yid522evu1kv"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2080972810]
